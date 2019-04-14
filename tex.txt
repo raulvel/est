@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+
+\title{Estimation for Control}
+\author{V\&V}
+\date{03/14/15}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+The purpose of this research paper is to obtain a better understanding of the estimation for control. We selected a random project in order to implement it and to observe its behavior. We start by calculating and simulating the nonlinear model of crane. Afterwards, we the linearize around the equilibrium point. Secondly we calculate a controller to stabilize the given system. 
+
+\section{2D overhead crane system}
+Consider a crane system shown in Figure 1. We have a pendulum attached to a support which moves only on the x-axis. The system has only one input u, which is force acting on the trolley. We assume that all the initial data is given (x, mt, l, mp, teta). The purpose is to control the movement displacement of the trolley.
+
+\includegraphics{https://www.researchgate.net/profile/Soon-Geul_Lee/publication/269699194/figure/fig1/AS:295172672901120@1447386057306/2D-overhead-crane-model.png}
+
+\section{Nonlinear model}
+The equation describing our system are:
+
+\begin{equation}
+(m_t+m_p)\ddot x+m_plcos\theta\ddot \theta - m_pl \dot \theta^2 sin\theta+f_1_1 \dot x = u
+\end{equation}
+
+\begin{equation}
+m_plcos\theta \ddot x +m_pl^2 \ddot \theta + m_pglsin\theta = 0
+\end{equation}
+They parameter values are given in the table below. 
+\begin{table}[h!]
+  \begin{center}
+    \caption{Multirow table.}
+    \label{tab:table1}
+    \begin{tabular}{l|l|r}
+      \textbf{Parameter} & \textbf{Notation} & \textbf{Value}\\
+      \hline
+      Trolley mass & m_t & 2\\
+      \hline
+      Payload mass & m_p & 0.85\\
+      \hline
+      Length of rope & L & 0.6\\
+      \hline
+      Gravitational acceleration & G & 9.81\\
+      \hline
+      Damping coefficient on the trolley & f_1_1 & 10\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \ddot{x}} = mf + mp
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \dot{x}} = f
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial x} = 0
+\end{equation}
+
+
+\begin{equation}
+\frac{\partial (1)}{\partial \ddot{\theta}} = mp\cdot l\cdot cos(\theta)
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \dot{\theta}} = -2\cdot mp\cdot l\cdot cos(\theta)
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \theta} = -mp\cdot l\cdot \ddot{\theta}\cdot sin(\theta) - mp\cdot l\cdot \dot{\theta}^2 \cdot cos(\theta)
+\end{equation}
+
+\begin{equation}
+\frac{\partial (2)}{\partial \ddot{x}} = mp\cdot l\cdot cos(\theta)
+\end{equation}
+
+\begin{equation}
+\frac{\partial (2)}{\partial \dot{x}} = 0
+\end{equation}
+
+\begin{equation}
+\frac{\partial (2)}{\partial x} = 0
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \ddot{\theta}} = mp\cdot l^2
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \dot{\theta}} = 0
+\end{equation}
+
+\begin{equation}
+\frac{\partial (1)}{\partial \theta} = mp\cdot l\cdot cos(\theta)
+\end{equation}
+\end{document}
